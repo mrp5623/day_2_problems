@@ -135,10 +135,6 @@ void problem6(){
         {1124, 11521}
     };
 
-    // tuple<long long, long long> data[1] = {
-    //     {532, 1449}
-    // };
-
     for (auto [num1,num2] : data){
         cout << "Calculating: " << num1 << " and " << num2 << endl;
         vector<long long> gcfs;
@@ -147,13 +143,10 @@ void problem6(){
         loop: while (!isPrime(num1) && !isPrime(num2)){
             for (long long i=2; i<=sqrt(num1); i++){
                 if (num1%i==0 && num2%i==0){
-                    //cout << "Found factor: " << i << endl;
                     gcfs.push_back(i);
                     lcm/=i;
                     num1/=i;
-                    //cout << "New num1: " << num1 << endl;
                     num2/=i;
-                    //cout << "New num2: " << num2 << endl;
                     goto loop;
                 }
             }

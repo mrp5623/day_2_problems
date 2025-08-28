@@ -1,29 +1,32 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Build with g++",
-      "type": "shell",
-      "command": "g++",
-      "args": [
-        "-Wall",
-        "-Wextra",
-        "-Werror",
-        "main.cpp"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}",
-        "shell": {
-          "executable": "C:\\WINDOWS\\System32\\wsl.exe",
-          "args": ["-e", "bash", "-c"]
-
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build with g++",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-Wall",
+                "-Wextra",
+                "-Werror",
+                "main.cpp"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "shell": {
+                    "executable": "C:\\WINDOWS\\System32\\wsl.exe",
+                    "args": [
+                        "-e",
+                        "bash",
+                        "-c"
+                    ]
+                }
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ]
         }
-      },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "problemMatcher": ["$gcc"]
-    }
-  ]
+        
+    ]
 }
