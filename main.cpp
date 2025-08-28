@@ -82,21 +82,46 @@ void problem4(){
     }
 }
 
+bool isPrime(int num){
+    for (int i=2; i<=sqrt(num); i++){
+        if (num==2) break;
+        if (num%i==0) return false;
+    }
+    return true;
+}
+
 void problem5(){
-    int num = 2463;
-    int factors[5];
-    while (num>0){
-        for (int i=2; i<sqrt(num); i++){
-           if (num%i==0 && isPrime(i)){
-                factors.push_back(i);
-                num/=i;
-           }
+    long long data[10] = {899418828139, 24936394564901, 4825309222309, 976586787151, 10292877700081, 6378832084507, 22239297958663, 39526637446, 77442640075663, 8674199170807};
+    for (long long num : data){
+        cout << "Finding factors for: " << num << endl;
+        int factors[5];
+        int count = 0;
+        while (count<4){
+            for (int i=2; i<=sqrt(num); i++){
+            
+            if (num%i==0 && isPrime(i)){
+                    factors[count]=i;
+                    //cout << "Factor found: " << i << endl;
+                    num/=i;
+                    count++;
+                    
+                } 
+            }   
+        
+        } 
+
+        factors[count]=num;
+
+        for (int factor : factors){
+            cout << factor << endl;
         }
     }
 }
 
+
 int main () {
-   problem4(); 
+   //cout << isPrime(2) << endl; 
+   problem5();
     
     return 0;
 }
