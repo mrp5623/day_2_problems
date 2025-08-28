@@ -1,6 +1,7 @@
 #include <iostream>
 #include <bitset>
 #include <cmath>
+#include <vector>
 using namespace std;
 
 // void problem1(){
@@ -66,21 +67,21 @@ using namespace std;
     
 // }
 
-void problem4(){
-    long long data[10]= {1297461688, 226114384, 2012824298, 467362887, 1269727688, 1733620503, 833477517, 1039684265, 157689069, 304066868};
+// void problem4(){
+//     long long data[10]= {1297461688, 226114384, 2012824298, 467362887, 1269727688, 1733620503, 833477517, 1039684265, 157689069, 304066868};
     
-    for (long long num : data){
+//     for (long long num : data){
     
-        int count = 0;
-        string ans = "";
-        while (num>0) {
-            ans = to_string(num%2) + ans;
-            num/=2;
-            count++;
-        }
-        cout << "Final: " << ans << endl;
-    }
-}
+//         int count = 0;
+//         string ans = "";
+//         while (num>0) {
+//             ans = to_string(num%2) + ans;
+//             num/=2;
+//             count++;
+//         }
+//         cout << "Final: " << ans << endl;
+//     }
+// }
 
 bool isPrime(int num){
     for (int i=2; i<=sqrt(num); i++){
@@ -90,33 +91,81 @@ bool isPrime(int num){
     return true;
 }
 
-void problem5(){
-    long long data[10] = {899418828139, 24936394564901, 4825309222309, 976586787151, 10292877700081, 6378832084507, 22239297958663, 39526637446, 77442640075663, 8674199170807};
-    for (long long num : data){
+// void problem5(){
+//     long long data[10] = {899418828139, 24936394564901, 4825309222309, 976586787151, 10292877700081, 6378832084507, 22239297958663, 39526637446, 77442640075663, 8674199170807};
+//     for (long long num : data){
 
-        cout << "Finding factors for: " << num << endl;
+//         cout << "Finding factors for: " << num << endl;
 
-        int factors[5];
-        int count = 0;
+//         int factors[5];
+//         int count = 0;
 
-        while (count<4){
+//         while (count<4){
 
-            for (int i=2; i<=sqrt(num); i++){
+//             for (int i=2; i<=sqrt(num); i++){
             
-                if (num%i==0 && isPrime(i)){
-                    factors[count]=i;
-                    num/=i;
-                    count++;
-                    break;
-                } 
-            }   
-        } 
+//                 if (num%i==0 && isPrime(i)){
+//                     factors[count]=i;
+//                     num/=i;
+//                     count++;
+//                     break;
+//                 } 
+//             }   
+//         } 
 
-        factors[count]=num;
+//         factors[count]=num;
 
-        for (int factor : factors){
-            cout << factor << endl;
+//         for (int factor : factors){
+//             cout << factor << endl;
+//         }
+//     }
+// }
+
+void problem6(){
+    tuple<long long, long long> data[10] = {
+        {16498, 20367},
+        {1749, 8692},
+        {61, 671},
+        {2409, 8176},
+        {56, 1784},
+        {403, 1116},
+        {2400, 1184},
+        {532, 1449},
+        {3611, 471},
+        {1124, 11521}
+    };
+
+    // tuple<long long, long long> data[1] = {
+    //     {532, 1449}
+    // };
+
+    for (auto [num1,num2] : data){
+        cout << "Calculating: " << num1 << " and " << num2 << endl;
+        vector<long long> gcfs;
+        long long gcf=1, lcm=num1*num2;
+
+        loop: while (!isPrime(num1) && !isPrime(num2)){
+            for (long long i=2; i<=sqrt(num1); i++){
+                if (num1%i==0 && num2%i==0){
+                    //cout << "Found factor: " << i << endl;
+                    gcfs.push_back(i);
+                    lcm/=i;
+                    num1/=i;
+                    //cout << "New num1: " << num1 << endl;
+                    num2/=i;
+                    //cout << "New num2: " << num2 << endl;
+                    goto loop;
+                }
+            }
+            break;
         }
+
+        for (long long factor : gcfs){
+            gcf*=factor;
+        }
+
+        cout << "GCF: " << gcf << endl;
+        cout << "LCM: " << lcm << endl;
     }
 }
 
@@ -126,7 +175,8 @@ int main () {
    // problem2();
    // problem3();
    // problem4();
-   problem5();
+   // problem5();
+   problem6();
     
     return 0;
 }
