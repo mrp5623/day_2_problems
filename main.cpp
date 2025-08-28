@@ -83,6 +83,16 @@ void problem4(){
 }
 
 void problem5(){
+    int num = 2463;
+    int factors[5];
+    while (num>0){
+        for (int i=2; i<sqrt(num); i++){
+           if (num%i==0 && isPrime(i)){
+                factors.push_back(i);
+                num/=i;
+           }
+        }
+    }
 }
 
 int main () {
