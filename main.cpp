@@ -122,7 +122,7 @@ bool isPrime(int num){
 // }
 
 void problem6(){
-    tuple<long long, long long> data[10] = {
+    pair<long long, long long> data[10] = {
         {16498, 20367},
         {1749, 8692},
         {61, 671},
@@ -137,13 +137,12 @@ void problem6(){
 
     for (auto [num1,num2] : data){
         cout << "Calculating: " << num1 << " and " << num2 << endl;
-        vector<long long> gcfs;
         long long gcf=1, lcm=num1*num2;
 
         loop: while (!isPrime(num1) && !isPrime(num2)){
             for (long long i=2; i<=sqrt(num1); i++){
                 if (num1%i==0 && num2%i==0){
-                    gcfs.push_back(i);
+                    gcf*=i;
                     lcm/=i;
                     num1/=i;
                     num2/=i;
@@ -153,13 +152,43 @@ void problem6(){
             break;
         }
 
-        for (long long factor : gcfs){
-            gcf*=factor;
-        }
-
         cout << "GCF: " << gcf << endl;
         cout << "LCM: " << lcm << endl;
     }
+}
+
+long long collatz_length(long long num) {
+    long long length = 1;
+
+    while(num != 1) {
+        if (num % 2 == 0) {
+            num /= 2;
+        } else {
+            num = 3 * num + 1;
+        }
+        length++;
+    }
+
+    return length;
+}
+
+void problem7() {
+    long long data[8] = {24972947, 96730748, 81430990, 63812793, 48704030, 86919575, 40400838, 16110817};
+    for (long long num : data) {
+        cout << "Collatz length for " << num << " is " << collatz_length(num) << endl;
+    }
+
+    int max = 0;
+    int num = 1; 
+    for(int i = 1; i < 5000; i++) {
+        int length = collatz_length(i);
+        if (length > max) {
+            max = length;
+            num = i;
+        }
+    }
+
+    cout << "Max: " << max  << " Num: " << num << endl;
 }
 
 
@@ -169,7 +198,8 @@ int main () {
    // problem3();
    // problem4();
    // problem5();
-   problem6();
+   // problem6();
+    problem7();
     
     return 0;
 }
