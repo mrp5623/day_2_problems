@@ -191,6 +191,45 @@ void problem7() {
     cout << "Max: " << max  << " Num: " << num << endl;
 }
 
+void problem8() {
+    int times[5] = {60, 90, 120 , 180, 300};
+    int wools[5] = {100, 1000, 10000, 100000, 1000000};
+
+    for (int time : times) {
+        int zero = 0, five = 0, ten = 0, fifteen = 0, adult = 2, wool = 0;
+
+
+        for(int i = 0; i < time; i+=5) {
+            adult += fifteen;
+            fifteen = ten;
+            ten = five;
+            five = zero;
+            zero = adult / 2;  
+            wool += adult;
+            
+        }
+        cout << "Wool: " << wool << endl;
+    }
+
+    for (int target_wool: wools) {
+        int zero = 0, five = 0, ten = 0, fifteen = 0, adult = 2, wool = 0;
+        int time = 0;
+
+
+        while (wool < target_wool) {
+            time +=5;
+            adult += fifteen;
+            fifteen = ten;
+            ten = five;
+            five = zero;
+            zero = adult / 2;  
+            wool += adult;
+        }
+        cout << "Time: " << time << endl;
+
+    }
+}
+
 
 int main () {
    // problem1();
@@ -199,7 +238,7 @@ int main () {
    // problem4();
    // problem5();
    // problem6();
-    problem7();
+    problem8();
     
     return 0;
 }

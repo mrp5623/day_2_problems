@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run a.out",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "wsl",
+            "args": ["./a.out"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "preLaunchTask": "Build with g++"
+        }
+    ]
+}
